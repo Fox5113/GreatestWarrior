@@ -6,7 +6,7 @@ class Warrior(object):
     ranks = ['Pushover', 'Novice', 'Fighter', 'Warrior', 'Veteran', 'Sage', 'Elite', 'Conqueror', 'Champion', 'Master', 'Greatest']
     index_start_rank = 0
     experience_to_up = 100
-    start_experience = 0
+    start_experience = 100
     max_experience = 10000
 
 
@@ -20,7 +20,7 @@ class Warrior(object):
 
     def battle(self, enemy_level):
 
-        diff =  self.level - enemy_level
+        diff = enemy_level - self.level
         if 1 >   self.level > 100:
             return "Invalid level"
         if diff  == 0:
@@ -32,9 +32,9 @@ class Warrior(object):
         elif   diff  <= -2:
             #self.add_experience(experience=0)
             return "Easy fight"
-        elif  5 > diff  > 0:
+        elif  5 > diff  > 0 or  enemy_level // 10 <= self.level // 10 :
             self.add_experience(experience= (20 * diff * diff))
-            return "Easy fight"
+            return "An intense fight"
         else:
             return "You've been defeated"
 
