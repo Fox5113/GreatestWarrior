@@ -19,7 +19,8 @@ class Warrior(object):
 
 
     def battle(self, enemy_level):
-
+        if enemy_level <= 0 or enemy_level > 100:
+            return "Invalid level"
         diff = enemy_level - self.level
         if 1 >   self.level > 100:
             return "Invalid level"
@@ -40,6 +41,8 @@ class Warrior(object):
 
     def training(self, arr):
         name, count_experence, recomend_level = arr
+        if recomend_level <= 0:
+            return "Invalid level"
         if self.level >= recomend_level:
 
             self.achievements.append(name)
@@ -50,9 +53,13 @@ class Warrior(object):
 
     def add_experience(self, experience):
         current_exp  = self.experience + experience
-
+        if current_exp >= self.max_experience:
+            self.experience = self.max_experience
+            self.level = 100
+            self.rank = self.ranks[10]
         if current_exp > self.max_experience:
             current_exp = self.max_experience
+            return "Invalid level"
 
         self.experience = current_exp
         self.level = current_exp // 100
